@@ -19,7 +19,7 @@ function draw() {
 	background(247);
 	for (let i = 0; i < gameBoard.rows; i++) {
 		for (let j = 0; j < gameBoard.cols; j++) {
-		  gameBoard.board[i][j].display();
+			gameBoard.board[i][j].display();
 		}
-	  }
+	}
 }

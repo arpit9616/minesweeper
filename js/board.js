@@ -81,9 +81,4 @@ class Board {
 		}
 	}
 
-	print() {
-		console.log(this.board)
-	}
-
-
 }

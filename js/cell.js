@@ -16,12 +16,13 @@ class Cell {
 		this.hasBomb = false;
 		this.isExplored = false;
 
-		this.mineColor = "red";
+		this.mineColor = null;
 		this.surroundingMineCount = -1;
 	}
 
 	placeBomb() {
 		this.hasBomb = true;
+		this.mineColor = "red";
 	}
 
 	setNeighbouringMineCount(count = -1) {
@@ -33,8 +34,10 @@ class Cell {
 	}
 
 	defuse() {
-		this.mineColor = "green";
 		this.isExplored = true;
+		if (this.hasBomb) {
+			this.mineColor = "green";
+		}
 	}
 
 	explore() {

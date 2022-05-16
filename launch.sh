@@ -1,6 +1,9 @@
+## This script will launch the ./index.html file in default browser
 
+# Directory path
 DIR="."
-# Get absolute path of containing directory
+
+# Function to get the absolute path of containing directory
 get_dir_path () {
 	SOURCE="${BASH_SOURCE[0]}"
 	while [ -h "$SOURCE" ]; do
@@ -11,9 +14,11 @@ get_dir_path () {
 	DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 }
 
+# Flags
 isMac=0
 isLinux=0
 
+# Check for supported OS types
 case "$OSTYPE" in
   darwin*)  isMac=1 ;; 
   linux*)   isLinux=1 ;;
@@ -31,3 +36,6 @@ if [ $isLinux = 1 ]; then
 	get_dir_path
 	firefox "$DIR/index.html"
 fi
+
+# Clean exit
+exit 0

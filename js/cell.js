@@ -14,8 +14,9 @@ class Cell {
 		this.x = this.j * this.size;
 
 		this.hasBomb = false;
-		this.isRevealed = false;
+		this.isExplored = false;
 
+		this.mineColor = "red";
 		this.surroundingMineCount = -1;
 	}
 
@@ -27,13 +28,26 @@ class Cell {
 		this.surroundingMineCount = count;
 	}
 
+	contains(y, x) {
+		return Boolean(x > this.x && x < this.x + this.size && y > this.y && y < this.y + this.size);
+	}
+
+	defuse() {
+		this.mineColor = "green";
+		this.isExplored = true;
+	}
+
+	explore() {
+		this.isExplored = true;
+	}
+
 	display() {
 		stroke(0);
 		noFill();
 		rect(this.y, this.x, this.size, this.size);
-		if (this.isRevealed) {
+		if (this.isExplored) {
 			if (this.hasBomb) {
-				fill("red");
+				fill(this.mineColor);
 				rect(this.y, this.x, this.size, this.size);
 			} else {
 				fill(203);

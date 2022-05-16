@@ -23,3 +23,35 @@ function draw() {
 		}
 	}
 }
+
+function mousePressed() {
+	if (!gameBoard || gameBoard.gameOver) {
+		return;
+	}
+	const i = parseInt(mouseX / gameBoard.boxSize), j = parseInt(mouseY / gameBoard.boxSize);
+	if (i < 0 || j < 0 || i >= gameBoard.rows || j >= gameBoard.cols) {
+		return;
+	}
+	const cell = gameBoard.board[i][j];
+	if (cell.contains(mouseX, mouseY)) {
+		cell.explore();
+
+		// Game over logic, player lost
+		if (cell.hasBomb) {
+			gameBoard.endGame();
+			return;
+		}
+
+		// Empty cell board explore logic
+		if (cell.surroundingMineCount == 0) {
+			gameBoard.autoExplore(i, j);
+		}
+
+		// Game over logic, player won
+		if (gameBoard.getUnexploredCellCount() == gameBoard.maxMines) {
+			gameBoard.revealBoard();
+			return;
+		}
+
+	}
+}
